@@ -1,5 +1,5 @@
 {
-  "version": "1.3.1",
+  "version": "1.3.2",
   "name": "faktore/fe-json-api-utilities",
   "type": "typo3-cms-extension",
   "description": "Faktor E JSON Utilities",
@@ -28,9 +28,6 @@
     "psr-4": {
       "Faktore\\FeJsonApiUtilities\\": "Classes"
     }
-  },
-  "replace": {
-    "faktore/fe-json-api-utilities": "self.version"
   },
   "config": {
     "vendor-dir": ".Build/vendor",

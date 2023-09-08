@@ -1,0 +1,45 @@
+{
+  "version": "1.2.0",
+  "name": "faktore/fe-json-api-utilities",
+  "type": "typo3-cms-extension",
+  "description": "Faktor E JSON Utilities",
+  "keywords": [
+    "TYPO3 CMS",
+    "Faktor E"
+  ],
+  "homepage": "https://www.faktor-e.de/",
+  "support": {
+    "issues": "https://www.faktor-e.de/"
+  },
+  "authors": [
+    {
+      "name": "Faktor E GmbH",
+      "email": "info@faktor-e.de",
+      "homepage": "https://www.faktor-e.de",
+      "role": "Developer"
+    }
+  ],
+  "license": "GPL-2.0+",
+  "require": {
+    "php": ">= 8.1.0, <= 8.2.99",
+    "typo3/cms-core": "^12.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Faktore\\FeJsonApiUtilities\\": "Classes"
+    }
+  },
+  "replace": {
+    "fe_json_api_utilities": "self.version"
+  },
+  "config": {
+    "vendor-dir": ".Build/vendor",
+    "bin-dir": ".Build/bin"
+  },
+  "extra": {
+    "typo3/cms": {
+      "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "extension-key": "fe_json_api_utilities"
+    }
+  }
+}  

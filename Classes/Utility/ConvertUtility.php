@@ -3,11 +3,13 @@
 namespace Faktore\FeJsonApiUtilities\Utility;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyObjectStorage;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Reflection\Exception\PropertyNotAccessibleException;
 use TYPO3\CMS\Extbase\Reflection\Exception\UnknownClassException;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+use TYPO3\CMS\Core\Site\SiteFinder;
 
 class ConvertUtility
 {
@@ -25,14 +27,16 @@ class ConvertUtility
      * @param array $propertiesToInclude
      * @return array
      */
-    public static function flattenFileStorage(mixed $fileStorage, array $propertiesToInclude = []): array
+    public static function flattenFileStorage(mixed $fileStorage, array $propertiesToInclude = [], $absoluteUrl = false): array
     {
         $distilledImages = [];
         if (self::isStorage($fileStorage)) {
             foreach ($fileStorage as $image) {
-                if ($originalResource = $image->getOriginalResource()) {
+                $originalResource = $image->getOriginalResource();
+                if ($originalResource instanceof FileReference) {
                     $props = $originalResource->getProperties();
-                    $distilledImageProperties['publicUrl'] = $originalResource->getPublicUrl();
+                    $distilledImageProperties['publicUrl'] = self::getPublicUrlOfResource($originalResource, $absoluteUrl);
+
                     foreach ($propertiesToInclude as $k => $v) {
                         $distilledImageProperties[$v] = $props[$v] ?? '';
                     }
@@ -216,5 +220,30 @@ class ConvertUtility
             if (is_array($obj)) return $obj[$key];
         }
         return [];
+    }
+
+    /**
+     * Gets the public URL of a FileReference.
+     * If the 'absolute' parameter is positive,
+     * will attempt to get a base URL with the site finder and prepend it.
+     *
+     * ```
+     * ConvertUtility::getPublicUrlOfResource( $originalResource, true );
+     * ```
+     *
+     * @param FileReference $originalResource
+     * @param bool $useAbsoluteUrl
+     * @return string|null
+     */
+    public static function getPublicUrlOfResource(FileReference $originalResource, bool $useAbsoluteUrl = false)
+    {
+        if ($useAbsoluteUrl) {
+            $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
+            $site = current($siteFinder->getAllSites());
+            $baseUrl = $site->getBase() ?: '';
+            return $baseUrl . ltrim($originalResource->getPublicUrl(), '/') ?? '';
+        }
+
+        return $originalResource->getPublicUrl() ?? '';
     }
 }

@@ -112,9 +112,11 @@ Here is where you have a ConvertUtility class that can do a lot of magic for you
 
 #### Flattening FAL objects or FAL Storages
 
-Use ```ConvertUtility::flattenFileStorage($imageFileStorage, $properties)```.
+Use ```ConvertUtility::flattenFileStorage($imageFileStorage, $properties, $useAbsoluteUrl)```.
 
 Note that in addition to the provided properties, every file in the storage will always yield the key 'publicUrl':
+
+**New in 1.4.0**: Added a third optional parameter to flattenFileStorage. If true, the 'publicUrl' will be made absolute.
 
 ```php
 
@@ -127,7 +129,8 @@ $result = [
     // get FAL storages flattened
     'images' => ConvertUtility::flattenFileStorage(
             $event->getImages(),
-            ['title', 'description', 'alternative']
+            ['title', 'description', 'alternative'],
+            true
         ) ?? '',
 ]; 
 

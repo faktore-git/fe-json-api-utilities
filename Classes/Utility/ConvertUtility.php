@@ -69,7 +69,7 @@ class ConvertUtility
      * ConvertUtility->isStorage( $obj );
      * ```
      */
-    public static function isStorage($obj)
+    public static function isStorage($obj): bool
     {
         if (!is_object($obj) || is_string($obj)) return false;
         $type = get_class($obj);

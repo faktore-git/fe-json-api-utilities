@@ -22,10 +22,6 @@ class ConvertUtility
      * ```
      * ConvertUtility::flattenObjectStorage($obj->getMyFalStorageProperty(), ['title', 'description', 'alternative']);
      * ```
-     *
-     * @param mixed $fileStorage
-     * @param array $propertiesToInclude
-     * @return array
      */
     public static function flattenFileStorage(mixed $fileStorage, array $propertiesToInclude = [], $absoluteUrl = false): array
     {
@@ -50,9 +46,6 @@ class ConvertUtility
     /**
      * converts a storage and properties inside into an array
      *
-     * @param mixed $objectStorage
-     * @param array $propertiesToInclude
-     * @return array
      * @throws PropertyNotAccessibleException
      * @throws UnknownClassException
      */
@@ -75,7 +68,6 @@ class ConvertUtility
      * ```
      * ConvertUtility->isStorage( $obj );
      * ```
-     * @return boolean
      */
     public static function isStorage($obj)
     {
@@ -87,10 +79,6 @@ class ConvertUtility
     /**
      * Converts an object storage into an array
      * Single objects get wrapped into a one-key array
-     *
-     * @param mixed $obj
-     *
-     * @return array
      */
     public static function forceArray(mixed $obj): array
     {
@@ -109,9 +97,6 @@ class ConvertUtility
      * Converts an object to array by iterating over all its properties,
      * or (optional and recommended): over a given list of properties
      *
-     * @param mixed $obj
-     * @param array $fields
-     * @return array
      * @throws PropertyNotAccessibleException
      * @throws UnknownClassException
      */
@@ -138,15 +123,14 @@ class ConvertUtility
      * ```
      *
      * @param mixed $obj model, array or class name
-     * @return array
      * @throws UnknownClassException
      */
-    public static function getKeys($obj)
+    public static function getKeys(mixed $obj): array
     {
         if (is_string($obj) && class_exists($obj)) {
             $obj = new $obj();
         }
-        $keys = [];
+
         if (is_object($obj)) {
             return ObjectAccess::getGettablePropertyNames($obj);
         } else if (is_array($obj)) {
@@ -164,9 +148,6 @@ class ConvertUtility
      * ```
      *
      * @param mixed $obj model/array
-     * @param string $key key to be retrieved
-     *
-     * @return mixed
      * @throws PropertyNotAccessibleException
      */
     public static function prop(mixed $obj, string $key): mixed
@@ -191,9 +172,6 @@ class ConvertUtility
      * ```
      *
      * @param mixed $obj model or array
-     * @param string $key the required key
-     *
-     * @return mixed
      * @throws PropertyNotAccessibleException
      */
     public static function accessSingleProperty(mixed $obj, string $key): mixed
@@ -230,12 +208,8 @@ class ConvertUtility
      * ```
      * ConvertUtility::getPublicUrlOfResource( $originalResource, true );
      * ```
-     *
-     * @param FileReference $originalResource
-     * @param bool $useAbsoluteUrl
-     * @return string|null
      */
-    public static function getPublicUrlOfResource(FileReference $originalResource, bool $useAbsoluteUrl = false)
+    public static function getPublicUrlOfResource(FileReference $originalResource, bool $useAbsoluteUrl = false): string|null
     {
         if ($useAbsoluteUrl) {
             $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);

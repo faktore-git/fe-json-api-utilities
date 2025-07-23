@@ -25,8 +25,6 @@ class JsonRequestUtility
 
     /**
      * Gets the JSON payload of a request
-     *
-     * @return self
      */
     public function parseJsonBody(): static
     {
@@ -52,49 +50,31 @@ class JsonRequestUtility
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getErrorMessages(): array
     {
         return $this->errorMessages;
     }
 
-    /**
-     * @param array $errorMessages
-     */
     public function setErrorMessages(array $errorMessages): void
     {
         $this->errorMessages = $errorMessages;
     }
 
-    /**
-     * @return array
-     */
     public function getDecodedData(): array
     {
         return $this->decodedData;
     }
 
-    /**
-     * @param array $decodedData
-     */
     public function setDecodedData(array $decodedData): void
     {
         $this->decodedData = $decodedData;
     }
 
-    /**
-     * @return bool
-     */
     public function isDataValid(): bool
     {
         return $this->dataValid;
     }
 
-    /**
-     * @param bool $dataValid
-     */
     public function setDataValid(bool $dataValid): void
     {
         $this->dataValid = $dataValid;

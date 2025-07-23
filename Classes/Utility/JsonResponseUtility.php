@@ -22,34 +22,21 @@ class JsonResponseUtility
         $this->success = false;
     }
 
-    /**
-     * @return array
-     */
     public function getData(): array
     {
         return $this->data;
     }
 
-    /**
-     * @param string $key
-     * @param mixed $data
-     */
     public function assignData(string $key, mixed $data): void
     {
         $this->data[$key] = $data;
     }
 
-    /**
-     * @return array
-     */
     public function getErrors(): array
     {
         return $this->errors;
     }
 
-    /**
-     * @param array $errors
-     */
     public function setErrors(array $errors): void
     {
         $this->errors = $errors;
@@ -59,25 +46,16 @@ class JsonResponseUtility
         $this->errors[] = $error;
     }
 
-    /**
-     * @return bool
-     */
     public function isSuccess(): bool
     {
         return $this->success;
     }
 
-    /**
-     * @param bool $success
-     */
     public function setSuccess(bool $success): void
     {
         $this->success = $success;
     }
 
-    /**
-     * @return false|string
-     */
     public function getOutput(): array
     {
         return [

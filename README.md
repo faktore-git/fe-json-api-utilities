@@ -17,6 +17,13 @@ To effectively utilize these frontend components, communication with a TYPO3 bac
 Since these are usually very isolated widgets that don't require a fully fledged (headless) API, extensions like TYPO3 headless or 
 t3api are very impressive, but they would be overkill in our use context. Instead we decided to go with this lightweight, self-maintainable solution.
 
+## Compatibility
+
+| Extension version | TYPO3            | PHP       |
+|-------------------|------------------|-----------|
+| 1.5.x             | 12.4, 13.4, 14.x | 8.1 – 8.4 |
+| 1.4.x             | 12.4, 13.4       | 8.1 – 8.3 |
+
 ## Usage
 
 ### JSON Requests

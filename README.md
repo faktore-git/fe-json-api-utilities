@@ -21,7 +21,7 @@ t3api are very impressive, but they would be overkill in our use context. Instea
 
 | Extension version | TYPO3            | PHP       |
 |-------------------|------------------|-----------|
-| 1.5.x             | 12.4, 13.4, 14.x | 8.1 – 8.4 |
+| 1.5.x             | 12.4, 13.4, 14.x | 8.1 – 8.5 |
 | 1.4.x             | 12.4, 13.4       | 8.1 – 8.3 |
 
 ## Usage

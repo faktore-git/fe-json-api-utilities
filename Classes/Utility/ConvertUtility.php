@@ -72,7 +72,7 @@ class ConvertUtility
     public static function isStorage($obj): bool
     {
         if (!is_object($obj) || is_string($obj)) return false;
-        $type = get_class($obj);
+        $type = $obj::class;
         return is_a($obj, ObjectStorage::class) || $type == LazyObjectStorage::class || $type == ObjectStorage::class || $type == \TYPO3\CMS\Extbase\Persistence\ObjectStorage::class;
     }
 
@@ -215,7 +215,7 @@ class ConvertUtility
             $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
             $site = current($siteFinder->getAllSites());
             $baseUrl = $site->getBase() ?: '';
-            return $baseUrl . ltrim($originalResource->getPublicUrl(), '/') ?? '';
+            return $baseUrl . ltrim((string) $originalResource->getPublicUrl(), '/') ?? '';
         }
 
         return $originalResource->getPublicUrl() ?? '';
